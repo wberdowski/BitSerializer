@@ -57,12 +57,6 @@ namespace BitSerializer
         {
             if (type.IsPrimitive || type == typeof(decimal))
             {
-                if (type == typeof(int))
-                {
-                    WriteVarInt((int)obj);
-                    return;
-                }
-
                 WritePrimitive(obj, type);
                 return;
             }
@@ -194,8 +188,11 @@ namespace BitSerializer
             Marshal.StructureToPtr(obj, ptr, false);
 
             byte* p = (byte*)ptr;
-            for (int i = 0; i < size; i++)
-                *buffer++ = p[i];
+            //for (int i = 0; i < size; i++)
+            //    *buffer++ = p[i];
+
+            Buffer.MemoryCopy(p, buffer, size, size);
+            buffer += size;
 
             Marshal.FreeCoTaskMem(ptr);
         }

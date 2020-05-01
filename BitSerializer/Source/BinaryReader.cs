@@ -7,6 +7,7 @@ namespace BitSerializer
 {
     public unsafe class BinaryReader : IDisposable
     {
+        private byte* start;
         private byte* buffer;
 
         /// <summary>
@@ -22,7 +23,7 @@ namespace BitSerializer
         /// </summary>
         public BinaryReader(byte[] bytes, int length, int offset)
         {
-            buffer = (byte*)Marshal.AllocCoTaskMem(length);
+            buffer = start = (byte*)Marshal.AllocCoTaskMem(length);
             Marshal.Copy(bytes, offset, (IntPtr)buffer, length);
         }
 
@@ -31,7 +32,7 @@ namespace BitSerializer
         /// </summary>
         public BinaryReader(byte* buffer)
         {
-            this.buffer = buffer;
+            this.buffer = start = buffer;
         }
 
         public object ReadSchema(Type type)
@@ -58,11 +59,6 @@ namespace BitSerializer
         {
             if (type.IsPrimitive || type == typeof(decimal))
             {
-                if (type == typeof(int))
-                {
-                    return ReadVarInt();
-                }
-
                 return ReadPrimitive(type);
             }
             else if (type.IsArray)
@@ -176,16 +172,18 @@ namespace BitSerializer
         {
             int size = Marshal.SizeOf(type);
             IntPtr ptr = Marshal.AllocCoTaskMem(size);
+
             ReadPrimitive((byte*)ptr, size);
             object obj = Marshal.PtrToStructure(ptr, type);
+
             Marshal.FreeCoTaskMem(ptr);
             return obj;
         }
 
         private void ReadPrimitive(byte* ptr, int bytes)
         {
-            for (int i = 0; i < bytes; i++)
-                ptr[i] = *buffer++;
+            Buffer.MemoryCopy(buffer, ptr, bytes, bytes);
+            buffer += bytes;
         }
 
         private byte ReadByte()
@@ -219,6 +217,8 @@ namespace BitSerializer
         /// </summary>
         public void Dispose()
         {
+            Marshal.FreeCoTaskMem((IntPtr)start);
+            start = null;
             buffer = null;
         }
     }
