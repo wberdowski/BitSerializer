@@ -9,7 +9,7 @@ namespace BitSerializer.Benchmarks
 {
     internal class Program
     {
-        private const int Iterations = 10_000_000;
+        private const int Iterations = 1_000_000;
 
         private static void Main()
         {
@@ -17,20 +17,20 @@ namespace BitSerializer.Benchmarks
                 0,
                 SampleEnum.Value1,
                 "sample text",
-                Encoding.UTF8.GetBytes("This is an encoded message")
+                Encoding.UTF8.GetBytes("This is an encoded message. Sample text is this elo pomelo 320.This is an encoded message. Sample text is this elo pomelo 320.This is an encoded message. Sample text is this elo pomelo 320.")
             );
 
             Console.WriteLine("Running BitSerializer benchmark...");
             RunBenchmark_BitSerializer(dataSchema);
             Console.WriteLine();
 
-            //Console.WriteLine("Running Newtonsoft.Json benchmark...");
-            //RunBenchmark_NewtonsoftJson(dataSchema);
-            //Console.WriteLine();
+            Console.WriteLine("Running Newtonsoft.Json benchmark...");
+            RunBenchmark_NewtonsoftJson(dataSchema);
+            Console.WriteLine();
 
-            //Console.WriteLine("Running BinaryFormatter benchmark...");
-            //RunBenchmark_BinaryFormatter(dataSchema);
-            //Console.WriteLine();
+            Console.WriteLine("Running BinaryFormatter benchmark...");
+            RunBenchmark_BinaryFormatter(dataSchema);
+            Console.WriteLine();
 
             Console.WriteLine("Benchamarking finished.");
 
@@ -124,6 +124,7 @@ namespace BitSerializer.Benchmarks
         private static void RunBenchmark_BinaryFormatter(SampleSchema dataSchema)
         {
             var totalSw = Stopwatch.StartNew();
+            long len = 0;
             using (var stream = new MemoryStream())
             {
                 double lowestSerializationTime = double.MaxValue;
@@ -138,6 +139,7 @@ namespace BitSerializer.Benchmarks
                     new BinaryFormatter().Serialize(stream, dataSchema);
                     sw.Stop();
 
+                    len = stream.Position;
                     stream.Position = 0;
 
                     if (sw.Elapsed.TotalMilliseconds < lowestSerializationTime)
@@ -163,6 +165,7 @@ namespace BitSerializer.Benchmarks
                 totalSw.Stop();
 
                 PrintResults("BinaryFormatter (Serialization)", lowestSerializationTime);
+                PrintResults("BinaryFormatter (Bytes)", len, false);
                 PrintResults("BinaryFormatter (Deserialization)", lowestDeserializationTime);
                 PrintResults("BinaryFormatter (Total)", totalSw.Elapsed.TotalMilliseconds);
             }
@@ -173,7 +176,8 @@ namespace BitSerializer.Benchmarks
             if (isTime)
             {
                 Console.WriteLine($"{caption.PadRight(50)}{value:0.0000} ms ({value * 1000:0.00} us)");
-            } else
+            }
+            else
             {
                 Console.WriteLine($"{caption.PadRight(50)}{value}");
             }

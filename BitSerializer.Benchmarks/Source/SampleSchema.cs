@@ -12,7 +12,7 @@ namespace BitSerializer.Benchmarks
 
         public SampleSchema()
         {
-            
+
         }
 
         public SampleSchema(int sampleInt, SampleEnum sampleEnum, string sampleString, byte[] sampleByteArr)
