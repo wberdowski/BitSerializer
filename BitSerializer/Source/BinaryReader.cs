@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BitSerializer.Utils;
+using System;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -37,7 +38,7 @@ namespace BitSerializer
 
         public object ReadSchema(Type type)
         {
-            FieldInfo[] fields = SchemaHelpers.GetSchemaMembers(type);
+            FieldInfo[] fields = SchemaUtils.GetSchemaMembers(type);
             object obj = Activator.CreateInstance(type);
 
             for (int i = 0; i < fields.Length; i++)
@@ -88,6 +89,9 @@ namespace BitSerializer
             throw new NotSupportedException($"Type {type.Name} is not supported.");
         }
 
+        /// <summary>
+        /// Read multi-dimensional array
+        /// </summary>
         private Array ReadMDArray(Type type)
         {
             Type eleType = type.GetElementType();
@@ -101,22 +105,10 @@ namespace BitSerializer
 
             for (int i = 0; i < arr.Length; i++)
             {
-                arr.SetValue(Read(eleType), MDArrayIndexToIndices(arr, i));
+                arr.SetValue(Read(eleType), ArrayUtils.ArrayIndexToIndices(arr, i));
             }
 
             return arr;
-        }
-
-        private int[] MDArrayIndexToIndices(Array a, int index)
-        {
-            int[] indices = new int[a.Rank];
-            for (int d = a.Rank - 1; d >= 0; d--)
-            {
-                var len = a.GetLength(d);
-                indices[d] = index % len;
-                index /= len;
-            }
-            return indices;
         }
 
         private Array Read1DArray(Type type)

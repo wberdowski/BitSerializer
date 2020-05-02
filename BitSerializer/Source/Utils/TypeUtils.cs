@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace BitSerializer
+namespace BitSerializer.Utils
 {
-    public static class TypeHelpers
+    public static class TypeUtils
     {
         public static bool IsBlittable(this Type type)
         {

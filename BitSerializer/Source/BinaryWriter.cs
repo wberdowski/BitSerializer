@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BitSerializer.Utils;
+using System;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -36,7 +37,7 @@ namespace BitSerializer
 
         public void WriteSchema(object obj, Type type)
         {
-            FieldInfo[] fields = SchemaHelpers.GetSchemaMembers(type);
+            FieldInfo[] fields = SchemaUtils.GetSchemaMembers(type);
 
             for (int i = 0; i < fields.Length; i++)
             {
@@ -121,7 +122,7 @@ namespace BitSerializer
                 var size = arr.Length * Marshal.SizeOf(eleType);
 
                 var handle = GCHandle.Alloc(arr, GCHandleType.Pinned);
-                var ptr = (int*)handle.AddrOfPinnedObject();
+                var ptr = (byte*)handle.AddrOfPinnedObject();
 
                 Buffer.MemoryCopy(ptr, buffer, size, size);
                 buffer += size;
@@ -162,39 +163,30 @@ namespace BitSerializer
 
         private void WritePrimitive(object obj, Type type)
         {
-            if (!type.IsBlittable())
-            {
-                WritePrimitiveNB(obj, type);
-                return;
-            }
-
             var size = Marshal.SizeOf(type);
-            var handle = GCHandle.Alloc(obj, GCHandleType.Pinned);
-            var ptr = (int*)handle.AddrOfPinnedObject();
 
-            Buffer.MemoryCopy(ptr, buffer, size, size);
-            buffer += size;
+            if (type.IsBlittable())
+            {
+                var handle = GCHandle.Alloc(obj, GCHandleType.Pinned);
+                var ptr = (byte*)handle.AddrOfPinnedObject();
 
-            handle.Free();
-        }
+                Buffer.MemoryCopy(ptr, buffer, size, size);
+                buffer += size;
 
-        /// <summary>
-        /// Writes a non-blittable primitve.
-        /// </summary>
-        private void WritePrimitiveNB(object obj, Type type)
-        {
-            int size = Marshal.SizeOf(type);
-            IntPtr ptr = Marshal.AllocCoTaskMem(size);
-            Marshal.StructureToPtr(obj, ptr, false);
+                handle.Free();
+            }
+            else
+            {
+                IntPtr ptr = Marshal.AllocCoTaskMem(size);
+                Marshal.StructureToPtr(obj, ptr, false);
 
-            byte* p = (byte*)ptr;
-            //for (int i = 0; i < size; i++)
-            //    *buffer++ = p[i];
+                byte* p = (byte*)ptr;
 
-            Buffer.MemoryCopy(p, buffer, size, size);
-            buffer += size;
+                Buffer.MemoryCopy(p, buffer, size, size);
+                buffer += size;
 
-            Marshal.FreeCoTaskMem(ptr);
+                Marshal.FreeCoTaskMem(ptr);
+            }
         }
 
         private void WriteVarInt(int value)
