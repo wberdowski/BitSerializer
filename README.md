@@ -7,6 +7,7 @@ The first step is to define a schema class containing the fields you want to ser
 ```cs
 public class DataPacket
 {
+    // Fields or properties you want to serialize
     public int Id { get; set; }
     public byte[] Payload { get; set; }
 
