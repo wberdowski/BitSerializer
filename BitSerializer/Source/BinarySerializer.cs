@@ -5,7 +5,7 @@ namespace BitSerializer
     public abstract unsafe class BinarySerializer
     {
         /// <summary>
-        /// Serializes an object of the supported type to a byte array.
+        /// Serializes an object to a byte array.
         /// </summary>
         public static byte[] Serialize<T>(T obj)
         {
@@ -13,7 +13,7 @@ namespace BitSerializer
         }
 
         /// <summary>
-        /// Deserializes a byte array to the object of the supported type.
+        /// Deserializes a byte array to the object.
         /// </summary>
         public static T Deserialize<T>(byte[] bytes)
         {
@@ -21,7 +21,7 @@ namespace BitSerializer
         }
 
         /// <summary>
-        /// Serializes an object of the supported type to a byte array.
+        /// Serializes an object to a byte array.
         /// </summary>
         public static byte[] Serialize(object obj, Type type)
         {
@@ -33,7 +33,7 @@ namespace BitSerializer
         }
 
         /// <summary>
-        /// Serializes an object of the supported type to the output buffer.
+        /// Serializes an object to the output buffer.
         /// </summary>
         public static void Serialize(byte* buffer, object obj, Type type)
         {
@@ -44,7 +44,7 @@ namespace BitSerializer
         }
 
         /// <summary>
-        /// Deserializes a byte array to the object of the supported type.
+        /// Deserializes a byte array to the object.
         /// </summary>
         public static object Deserialize(byte[] bytes, Type type)
         {
@@ -55,7 +55,7 @@ namespace BitSerializer
         }
 
         /// <summary>
-        /// Deserializes the input buffer data to the object of the supported type.
+        /// Deserializes the input buffer data to the object.
         /// </summary>
         public static object Deserialize(byte* buffer, Type type)
         {
