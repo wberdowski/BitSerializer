@@ -17,7 +17,7 @@ namespace BitSerializer.Benchmarks
                 0,
                 SampleEnum.Value1,
                 "sample text",
-                Encoding.UTF8.GetBytes("This is an encoded message. Sample text is this elo pomelo 320.This is an encoded message. Sample text is this elo pomelo 320.This is an encoded message. Sample text is this elo pomelo 320.")
+                Encoding.UTF8.GetBytes("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce porta eu velit ac molestie. Suspendisse viverra nulla ut nibh commodo luctus. Donec nec posuere dui. Sed ac nunc bibendum ante ornare eleifend vel sed ligula. Nam sed augue venenatis, elementum velit hendrerit, cursus lacus. Aenean finibus pretium mauris sit amet mollis. Nullam ullamcorper hendrerit magna, interdum lacinia metus interdum sed.")
             );
 
             Console.WriteLine("Running BitSerializer benchmark...");
