@@ -1,6 +1,15 @@
 # BitSerializer
 Binary serializer built with low latency network communication in mind.
-# How to use it?
+# Key features
+* Easy to use
+* Fast serialization and deserialization (see Performance section)
+* Supports nested schema types
+* No external compilator required
+* Classes act as a serialization schema
+* Included sample projects
+# Performance
+![chart](https://i.imgur.com/Dfi1rz6.png)
+# How to use?
 ## Schema definition
 The first step is to define a schema class containing the fields you want to serialize. It specifies in which order to serialize your data and deserialize it later.
 #### Example
