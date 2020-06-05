@@ -11,7 +11,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BitSerializer\BitSerializer.csproj" />
+    <ProjectReference Include="..\..\BitSerializer\BitSerializer.csproj" />
   </ItemGroup>
 
 </Project>
