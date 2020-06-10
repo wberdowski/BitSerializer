@@ -2,6 +2,7 @@
 Binary serializer built with low latency network communication in mind.
 # Key features
 * Easy to use
+* Lightweight
 * Fast serialization and deserialization (see Performance section)
 * Supports nested schema types
 * No external compilator required
@@ -47,7 +48,7 @@ DataPacket packet = new DataPacket(
 byte[] bytes = BinarySerializer.Serialize(packet);
 ```
 ## Deserialization
-Pass the bytes returned by the ```BinarySerializer.Serialize``` to the ```BinarySerializer.Deserialize<T>``` method specyfing the type of the schema class. 
+Pass the bytes returned by the ```BinarySerializer.Serialize``` to the ```BinarySerializer.Deserialize<T>``` method specifying the type of the schema class. 
 #### Example
 ```cs
 DataPacket packet = BinarySerializer.Deserialize<DataPacket>(bytes);
