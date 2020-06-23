@@ -1,5 +1,8 @@
 # BitSerializer
 Binary serializer built with low latency network communication in mind.
+# NuGet package
+https://www.nuget.org/packages/BitSerializer/
+
 # Key features
 * Easy to use
 * Lightweight
