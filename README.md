@@ -13,6 +13,8 @@ https://www.nuget.org/packages/BitSerializer/
 * Included sample projects
 # Performance
 ![chart](https://i.imgur.com/Dfi1rz6.png)
+
+[See benchmark source code](BitSerializer.Benchmarks/Source/Program.cs)
 # How to use?
 ## Schema definition
 The first step is to define a schema class containing the fields you want to serialize. It specifies in which order to serialize your data and deserialize it later.
