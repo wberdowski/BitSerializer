@@ -16,6 +16,9 @@ https://www.nuget.org/packages/BitSerializer/
 
 [See benchmark source code](BitSerializer.Benchmarks/Source/Program.cs)
 # How to use?
+## Samples
+The best way to learn how to use BitSerializer is to take a look at the provided [sample projects](Samples).
+
 ## Schema definition
 The first step is to define a schema class containing the fields you want to serialize. It specifies in which order to serialize your data and deserialize it later.
 #### Example
