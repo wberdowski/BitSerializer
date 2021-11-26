@@ -16,6 +16,7 @@ namespace BitSerializer.Samples.Echo.EchoServer
             string version = Assembly.GetExecutingAssembly().GetName().Version.ToString(3);
             Console.WriteLine($"EchoServer {version}");
 
+            socket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, true);
             socket.Bind(new IPEndPoint(IPAddress.Any, 50000));
             Console.WriteLine($"Listening at {socket.LocalEndPoint}");
 

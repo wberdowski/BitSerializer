@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>net5.0</TargetFramework>
     <RepositoryUrl>https://github.com/wberdowski/BitSerializer</RepositoryUrl>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <Version>1.0.1</Version>

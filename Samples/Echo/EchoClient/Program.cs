@@ -22,6 +22,7 @@ namespace BitSerializer.Samples.Echo.EchoClient
             Console.WriteLine($"EchoClient {version}");
             Console.WriteLine("Type \"echo [ip address]\"");
 
+            socket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, true);
             socket.Bind(new IPEndPoint(IPAddress.Any, 50000));
 
             // Read commands from console
