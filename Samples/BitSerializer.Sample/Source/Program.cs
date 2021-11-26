@@ -14,6 +14,8 @@ namespace BitSerializer.Sample
 
             // Serialize packet object
             byte[] bytes = BinarySerializer.Serialize(packet);
+            Console.WriteLine($"Serialized size: {bytes.Length} B");
+            Console.WriteLine();
 
             // Deserialize packet object
             DataPacket packet2 = BinarySerializer.Deserialize<DataPacket>(bytes);

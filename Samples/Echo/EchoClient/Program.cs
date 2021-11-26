@@ -76,7 +76,7 @@ namespace BitSerializer.Samples.Echo.EchoClient
                 sw.Stop();
 
                 var recvPacket = BinarySerializer.Deserialize<EchoPacket>(recvBuffer);
-                if(recvPacket.Id == packet.Id && recvPacket.Type == EchoPacketType.Response)
+                if (recvPacket.Id == packet.Id && recvPacket.Type == EchoPacketType.Response)
                 {
                     Console.WriteLine($"Received echo. Time: {sw.Elapsed.TotalMilliseconds} ms");
                 }

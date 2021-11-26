@@ -42,6 +42,10 @@ namespace BitSerializer
             for (int i = 0; i < fields.Length; i++)
             {
                 var field = fields[i];
+                if (field.Attributes.HasFlag(FieldAttributes.NotSerialized))
+                {
+                    continue;
+                }
                 var dataType = field.FieldType;
                 var value = field.GetValue(obj);
 
