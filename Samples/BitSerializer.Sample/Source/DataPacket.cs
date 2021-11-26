@@ -1,9 +1,14 @@
-﻿namespace BitSerializer.Sample
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+
+namespace BitSerializer.Sample
 {
     public class DataPacket
     {
-        public int Id { get; set; }
-        public byte[] Payload { get; set; }
+        public int Id;
+        [NonSerialized]
+        public byte[] Payload;
 
         public DataPacket()
         {

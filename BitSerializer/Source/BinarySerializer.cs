@@ -7,8 +7,14 @@ namespace BitSerializer
         /// <summary>
         /// Serializes an object to a byte array.
         /// </summary>
+        /// <exception cref="SchemaException"/>
         public static byte[] Serialize<T>(T obj)
         {
+            if (!typeof(T).IsValueType && typeof(T).GetConstructor(Type.EmptyTypes) == null)
+            {
+                throw new SchemaException(typeof(T), "Schema does not provide parameterless constructor.");
+            }
+
             return Serialize(obj, typeof(T));
         }
 
