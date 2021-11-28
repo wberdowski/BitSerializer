@@ -6,10 +6,10 @@ https://www.nuget.org/packages/BitSerializer/
 # Key features
 * Easy to use
 * Lightweight
-* Fast serialization and deserialization (see Performance section)
+* Fast serialization and deserialization (see [Performance](#performance) section)
 * Supports nested schema types
-* No external compilator required
-* Classes act as a serialization schema
+* No external compiler required
+* Classes/Structs as schema
 * Included sample projects
 # Performance
 ![chart](https://i.imgur.com/Dfi1rz6.png)
@@ -20,7 +20,7 @@ https://www.nuget.org/packages/BitSerializer/
 The best way to learn how to use BitSerializer is to take a look at the provided [sample projects](Samples).
 
 ## Schema definition
-The first step is to define a schema class containing the fields you want to serialize. It specifies in which order to serialize your data and deserialize it later.
+Define a schema class/struct containing fields you want to serialize.
 #### Example
 ```cs
 public class DataPacket
@@ -44,7 +44,7 @@ public class DataPacket
 }
 ```
 ## Serialization
-Create an instance of the schema class created earlier and pass it to the ```BinarySerializer.Serialize``` method.
+Create an instance of the schema class and pass it to the ```BinarySerializer.Serialize``` method.
 #### Example
 ```cs
 DataPacket packet = new DataPacket(
@@ -56,7 +56,7 @@ DataPacket packet = new DataPacket(
 byte[] bytes = BinarySerializer.Serialize(packet);
 ```
 ## Deserialization
-Pass the bytes returned by the ```BinarySerializer.Serialize``` to the ```BinarySerializer.Deserialize<T>``` method specifying the type of the schema class. 
+Pass bytes returned by the ```BinarySerializer.Serialize``` to the ```BinarySerializer.Deserialize<T>``` method specifying the type of the schema class. 
 #### Example
 ```cs
 DataPacket packet = BinarySerializer.Deserialize<DataPacket>(bytes);
