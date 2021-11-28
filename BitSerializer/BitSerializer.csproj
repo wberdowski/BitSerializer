@@ -4,7 +4,7 @@
     <TargetFramework>net5.0</TargetFramework>
     <RepositoryUrl>https://github.com/wberdowski/BitSerializer</RepositoryUrl>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
-    <Version>1.0.1</Version>
+    <Version>1.0.2</Version>
     <Description>Binary serializer built with low latency network communication in mind.</Description>
     <Authors>Wojciech Berdowski</Authors>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
