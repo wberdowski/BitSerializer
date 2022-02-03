@@ -86,5 +86,16 @@ namespace BitSerializer.Tests
             using BinaryReader reader = new BinaryReader(writer.PackBytes());
             Assert.AreEqual(obj.GetHashCode(), reader.Read(typeof(SampleClass)).GetHashCode());
         }
+
+        [TestMethod]
+        public void Check_TypeSupport_DateTime()
+        {
+            var input = new DateTimeClass(DateTime.Now);
+
+            byte[] bytes = BinarySerializer.Serialize(input);
+            var output = BinarySerializer.Deserialize<DateTimeClass>(bytes);
+
+            Assert.AreEqual(input, output);
+        }
     }
 }

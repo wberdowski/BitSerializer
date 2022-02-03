@@ -8,10 +8,12 @@ namespace BitSerializer.Tests
         [TestMethod]
         public void Check_Serialization_Deserialization_Errors()
         {
-            var data = DataSchema.GenerateRandom();
+            var input = DataSchema.GenerateRandom();
 
-            byte[] bytes = BinarySerializer.Serialize(data);
-            BinarySerializer.Deserialize<DataSchema>(bytes);
+            byte[] bytes = BinarySerializer.Serialize(input);
+            var output = BinarySerializer.Deserialize<DataSchema>(bytes);
+
+            Assert.IsTrue(input.Equals(output));
         }
 
         //[TestMethod]

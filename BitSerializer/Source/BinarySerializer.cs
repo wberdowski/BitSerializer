@@ -10,10 +10,10 @@ namespace BitSerializer
         /// <exception cref="SchemaException"/>
         public static byte[] Serialize<T>(T obj)
         {
-            if (!typeof(T).IsValueType && typeof(T).GetConstructor(Type.EmptyTypes) == null)
-            {
-                throw new SchemaException(typeof(T), "Schema does not provide parameterless constructor.");
-            }
+            //if (!typeof(T).IsValueType && typeof(T).GetConstructor(Type.EmptyTypes) == null)
+            //{
+            //    throw new SchemaException(typeof(T), $"Schema does not provide parameterless constructor: {typeof(T)}");
+            //}
 
             return Serialize(obj, typeof(T));
         }
@@ -33,7 +33,8 @@ namespace BitSerializer
         {
             using (var writer = new BinaryWriter())
             {
-                writer.WriteSchema(obj, type);
+                writer.Write(obj, type);
+                //writer.WriteSchema(obj, type);
                 return writer.PackBytes();
             }
         }
@@ -56,7 +57,7 @@ namespace BitSerializer
         {
             using (var reader = new BinaryReader(bytes, bytes.Length, 0))
             {
-                return reader.ReadSchema(type);
+                return reader.Read(type);
             }
         }
 

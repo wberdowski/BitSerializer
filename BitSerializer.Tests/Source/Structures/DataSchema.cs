@@ -66,27 +66,7 @@ namespace BitSerializer.Tests
 
         public override bool Equals(object obj)
         {
-            return obj is DataSchema schema &&
-                   SByteVal == schema.SByteVal &&
-                   ByteVal == schema.ByteVal &&
-                   ShortVal == schema.ShortVal &&
-                   UShortVal == schema.UShortVal &&
-                   IntVal == schema.IntVal &&
-                   UIntVal == schema.UIntVal &&
-                   LongVal == schema.LongVal &&
-                   ULongVal == schema.ULongVal &&
-                   CharVal == schema.CharVal &&
-                   FloatVal == schema.FloatVal &&
-                   DoubleVal == schema.DoubleVal &&
-                   BoolVal == schema.BoolVal &&
-                   StringVal == schema.StringVal &&
-                   DecimalVal == schema.DecimalVal &&
-                   EnumVal == schema.EnumVal &&
-                   EqualityComparer<SampleStruct>.Default.Equals(StructVal, schema.StructVal) &&
-                   EqualityComparer<SampleClass>.Default.Equals(ClassVal, schema.ClassVal) &&
-                   EqualityComparer<int[]>.Default.Equals(IntArray, schema.IntArray) &&
-                   EqualityComparer<float[]>.Default.Equals(FloatArray, schema.FloatArray) &&
-                   EqualityComparer<char[]>.Default.Equals(CharArray, schema.CharArray);
+            return obj is DataSchema schema && schema.GetHashCode() == GetHashCode();
         }
 
         public override int GetHashCode()
@@ -107,8 +87,8 @@ namespace BitSerializer.Tests
             hash.Add(StringVal);
             hash.Add(DecimalVal);
             hash.Add(EnumVal);
-            hash.Add(StructVal);
-            hash.Add(ClassVal);
+            hash.Add(StructVal.GetHashCode());
+            hash.Add(ClassVal.GetHashCode());
             hash.Add(IntArray);
             hash.Add(FloatArray);
             hash.Add(CharArray);

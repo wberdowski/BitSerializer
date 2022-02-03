@@ -8,6 +8,8 @@
     <Description>Binary serializer built with low latency network communication in mind.</Description>
     <Authors>Wojciech Berdowski</Authors>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <AssemblyVersion>1.0.2</AssemblyVersion>
+    <FileVersion>1.0.2</FileVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
