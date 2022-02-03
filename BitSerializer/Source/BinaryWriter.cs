@@ -152,8 +152,8 @@ namespace BitSerializer
             else
             {
                 // Write string length
-                WriteVarInt(str.Length);
                 byte[] bytes = Encoding.UTF8.GetBytes(str);
+                WriteVarInt(bytes.Length);
 
                 Marshal.Copy(bytes, 0, (IntPtr)buffer, bytes.Length);
                 buffer += bytes.Length;
