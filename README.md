@@ -2,7 +2,7 @@
 Please note that this project is **no longer actively maintained or supported**. While I appreciate your interest in this project, I can no longer provide updates and bug fixes. Thank you for your understanding and support.
 
 > **Note**
-As an alternative, I highly recommend that you consider migrating to the **MessagePack-CSharp**, which provides an extended set of features and is actively maintained by a dedicated team of developers.
+As an alternative, I highly recommend that you consider migrating to the **[MessagePack-CSharp](https://github.com/neuecc/MessagePack-CSharp)**, which provides an extended set of features and is actively maintained by a dedicated team of developers.
 
 # BitSerializer
 Binary serializer built with low latency network communication in mind.
